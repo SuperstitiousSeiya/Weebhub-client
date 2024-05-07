@@ -97,10 +97,10 @@ export function HomeCarousel({ className }: Props) {
                       </Button>
                       <Button variant={"outline"} className="px-3 flex gap-2">
                         {" "}
-                        <Info></Info> Play
+                        <Info></Info> Details
                       </Button>
                       <Button variant={"outline"} className="px-3 flex gap-2">
-                        <BookmarkPlus /> Play
+                        <BookmarkPlus /> Save
                       </Button>
                     </div>
                   </div>

@@ -141,23 +141,23 @@ const PopularSide = () => {
 // Adjust ratings to be rounded to the nearest 0.5
 const adjustedWeeklyLists = weeklyLists.map(list => ({
     ...list,
-    rating: list.rating === 10 ? 5 : Math.round((list.rating / 10) * 5 * 2) / 2
+    rating: Math.round((list.rating / 10) * 5 * 2) / 2
   }));
   
   const adjustedMonthlyLists = monthlyLists.map(list => ({
     ...list,
-    rating: list.rating === 10 ? 5 : Math.round((list.rating / 10) * 5 * 2) / 2
+    rating: Math.round((list.rating / 10) * 5 * 2) / 2
   }));
 
   const adjustedAllTimeLists = allLists.map(list => ({
     ...list,
-    rating: list.rating === 10 ? 5 : Math.round((list.rating / 10) * 5 * 2) / 2
+    rating: Math.round((list.rating / 10) * 5 * 2) / 2
   }));
   
 
-  console.log(adjustedAllTimeLists)
+  // console.log(adjustedAllTimeLists)
   return (
-    <div className="bg-secondary rounded-md ">
+    <div className="bg-secondary rounded-lg h-fit">
       <h1 className="font-semibold text-xl px-4 py-2 border-b border-white ">
         Popular
       </h1>
