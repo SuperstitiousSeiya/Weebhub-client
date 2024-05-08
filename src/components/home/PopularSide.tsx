@@ -2,10 +2,9 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { Button } from "../ui/button";
 import { Rating } from "react-simple-star-rating";
 
-const PopularSide = () => {
+const PopularSide = ({className}: {className?: string}) => {
   const weeklyLists = [
     {
       top: 1,
@@ -157,18 +156,18 @@ const adjustedWeeklyLists = weeklyLists.map(list => ({
 
   // console.log(adjustedAllTimeLists)
   return (
-    <div className="bg-secondary rounded-lg h-fit">
+    <div className={`rounded-lg h-fit ${className}`}>
       <h1 className="font-semibold text-xl px-4 py-2 border-b border-white ">
         Popular
       </h1>
       <div className="Menu">
         <Tabs defaultValue="weekly">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid bg-primary-foreground w-full grid-cols-3">
             <TabsTrigger value="weekly">Weekly</TabsTrigger>
             <TabsTrigger value="monthly">Monthly</TabsTrigger>
             <TabsTrigger value="all">All</TabsTrigger>
           </TabsList>
-          <TabsContent value="weekly" className="bg-secondary px-4">
+          <TabsContent value="weekly" className="px-4">
             <div className="flex flex-col gap-4 py-4">
               {adjustedWeeklyLists.map((list, index) => (
                 <div key={index} className="flex gap-4 items-center">
@@ -191,7 +190,7 @@ const adjustedWeeklyLists = weeklyLists.map(list => ({
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="monthly" className="bg-secondary px-4">
+          <TabsContent value="monthly" className="px-4">
             <div className="flex flex-col gap-4 py-4">
               {adjustedMonthlyLists.map((list, index) => (
                 <div key={index} className="flex gap-4 items-center">
@@ -214,7 +213,7 @@ const adjustedWeeklyLists = weeklyLists.map(list => ({
               ))}
             </div>
           </TabsContent>
-          <TabsContent value="all" className="bg-secondary px-4">
+          <TabsContent value="all" className="px-4">
           <div className="flex flex-col gap-4 py-4  max-h-[30rem] overflow-auto">
               {adjustedAllTimeLists.map((list, index) => (
                 <div key={index} className="flex gap-4 items-center">

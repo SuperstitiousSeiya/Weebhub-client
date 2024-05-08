@@ -19,10 +19,25 @@ export const getWatchAnime = async (
   episodeId: string
 ): Promise<any> => {
   try {
-    const response = await fetch(`http://localhost/anime/gogoanime/watch/${animeId}-episode-${episodeId}`);
+    const response = await fetch(
+      `http://localhost/anime/gogoanime/watch/${animeId}-episode-${episodeId}`
+    );
     const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
   }
 };
+
+export const getTopAiring = async (): Promise<any> => {
+  try {
+    const response = await fetch(
+      `http://localhost/anime/gogoanime/top-airing`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+

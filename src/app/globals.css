@@ -9,6 +9,11 @@ svg.star-svg {
   display: inline;
 }
 
+:root{
+  --media-brand: 245 245 245;
+  --media-focus: 78 156 246;
+}
+
 #home-section {
  grid-template-columns: 75% auto;
 }
@@ -18,9 +23,12 @@ svg.star-svg {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 } */
 
+
+
 @layer base {
 
   :root {
+ 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -86,6 +94,17 @@ svg.star-svg {
 @layer base {
   * {
     @apply border-border;
+  }
+
+  .dynamic-font-size {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .text-dynamic{
+    text-size-adjust: auto;
+    font-size: calc(10px + (15 - 10) * ((100vw - 300px) / (1600 - 300))); /* Adjust the min and max font size values as needed */
   }
   body {
     @apply bg-background text-foreground;
