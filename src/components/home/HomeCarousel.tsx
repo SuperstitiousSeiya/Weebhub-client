@@ -1,4 +1,7 @@
-"use client";
+
+// @ts-ignore
+
+"use client"
 
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -17,6 +20,7 @@ import DynamicText from "../weebui/Text/DynamicText";
 import Link from "next/link";
 import SoleDescription from "../weebui/Text/SoleDescription";
 import { SkeletonCard } from "../weebui/Skeletons/SkeletonCard";
+import { Badge } from "../ui/badge";
 
 type Props = {
   className?: string;
@@ -34,10 +38,14 @@ interface Anime {
 
 export function HomeCarousel({ className }: Props) {
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(1);
   const [count, setCount] = useState(7);
   const [topAiring, setTopAiring] = useState<Anime[]>();
   const [loading, setloading] = useState(true);
+  const plugin = React.useRef(Autoplay({ delay: 10000 }));
+
+
+
 
   useEffect(() => {
     fetchTopAiring();
@@ -47,9 +55,8 @@ export function HomeCarousel({ className }: Props) {
     if (!api) {
       return;
     }
-    console.log(count)
     setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
+    // setCurrent(api.selectedScrollSnap() + 1);
 
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
@@ -63,12 +70,18 @@ export function HomeCarousel({ className }: Props) {
     }
     setCurrent(api.selectedScrollSnap() + 1);
   };
-  const plugin = React.useRef(Autoplay({ delay: 10000 }));
+
+
 
   async function fetchTopAiring() {
-    const data = await getTopAiring();
-    setTopAiring(data.results);
-    setloading(false);
+    try {
+      const data = await getTopAiring();
+      setTopAiring(data.results);
+      setloading(false);
+    } catch (error) {
+      console.log("asds")
+    }
+
   }
 
   return (
@@ -101,9 +114,9 @@ export function HomeCarousel({ className }: Props) {
                         <div>
                           <div className="genres flex gap-2 flex-wrap mb-2">
                             {info.genres.map((genre, index) => (
-                              <p key={index} className="bg-green-500 px-2 y-1 rounded-md">
+                              <Badge key={index} className="bg-green-500 px-2 y-1 rounded-md">
                                 {genre}
-                              </p>
+                              </Badge>
                             ))}
                           </div>
 

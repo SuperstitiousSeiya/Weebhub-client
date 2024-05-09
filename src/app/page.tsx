@@ -1,5 +1,6 @@
 "use client";
 
+import ErrorPage from "@/components/ErrorPage";
 import { HomeCarousel } from "@/components/home/HomeCarousel";
 import PopularSide from "@/components/home/PopularSide";
 import { SkeletonCard } from "@/components/weebui/Skeletons/SkeletonCard";
@@ -10,29 +11,34 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [popularAnime, setPopularAnime] = useState<Anime[] | null>(null);
 
   useEffect(() => {
     loadPopular();
+    return () => {};
   }, []);
-
 
   const loadPopular = async () => {
     setLoading(true);
-    const popular = await fetchPopular();
-    setLoading(false);
-    setPopularAnime(popular?.results);
+    try {
+      const popular = await fetchPopular();
+      setLoading(false);
+      setPopularAnime(popular?.results);
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
   };
 
   return (
     <>
       <section className="px-4 xl:grid py-2 gap-4 container" id="home-section">
         {/* left section  */}
-        <div className="flex flex-col gap-6 pt-2">
-       
-            <HomeCarousel className=""></HomeCarousel>
-       
 
+        <div className="flex flex-col gap-6 pt-2">
+          <HomeCarousel className=""></HomeCarousel>
+          {error && <ErrorPage></ErrorPage>}
           <div className=" py-4 rounded-md bg-primary-foreground">
             <h1 className=" px-4 border-b border-primary-foreground pb-2 text-2xl font-bold">
               Popular Today

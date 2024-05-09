@@ -3,6 +3,8 @@ import { useRouter, useParams } from "next/navigation";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Badge } from "../ui/badge";
+import { getRandomColor } from "@/lib/other/extras";
 
 export type Episode = {
   id: string;
@@ -51,26 +53,26 @@ const AnimeInfoComponent = ({
     <div className="">
       <div className="flex gap-4 mb-4 max-lg:flex-col max-lg:items-center">
         {/* img  */}
-        <div className="flex w-[30rem] min-w-[15rem] max-h-[40rem]">
+        <div className="flex w-[30rem] min-w-[15rem] max-h-[30rem]">
           <Image
             src={image}
             width={400}
             height={200}
-            className="aspect-[9/16] object-cover"
+            className="aspect-[9/16] w-full h-full object-cover"
             alt={title}
           />
         </div>
 
         {/* right */}
         <div>
-          <ul className="flex flex-wrap gap-2 mb-2" >
+          <ul className="flex flex-wrap gap-2 mb-2">
             {genres.map((genre) => (
-              <li
-                className="bg-green-500 w-fit px-2 py-1 rounded-md"
+              <Badge
+                className={`bg-[${getRandomColor()}] w-fit px-2 py-1 rounded-md`}
                 key={genre}
               >
                 {genre}
-              </li>
+              </Badge>
             ))}
           </ul>
           <h2 className="text-4xl font-bold mb-4">{title}</h2>
@@ -78,19 +80,34 @@ const AnimeInfoComponent = ({
           <h3 className="text-lg font-bold">Description: </h3>
           <p className="mb-2">{description}</p>
 
-          <p className="font-bold">Total Episodes: <span className="font-thin">{totalEpisodes}</span> </p>
-          <p className="font-bold">Release Date: <span className="font-thin">{releaseDate}</span></p>
-          <p className="font-bold">Status: <span className="font-thin"> {status}</span></p>
-          <p className="font-bold">Sub or Dub: <span className="font-thin">{subOrDub}</span></p>
-          <p className="font-bold">Type: <span className="font-thin">{type}</span> </p>
-          <p className="font-bold">Other Names: <span className="font-thin">{otherName}</span></p>
+          <p className="font-bold">
+            Total Episodes: <span className="font-thin">{totalEpisodes}</span>{" "}
+          </p>
+          <p className="font-bold">
+            Release Date: <span className="font-thin">{releaseDate}</span>
+          </p>
+          <p className="font-bold">
+            Status: <span className="font-thin"> {status}</span>
+          </p>
+          <p className="font-bold">
+            Sub or Dub: <span className="font-thin">{subOrDub}</span>
+          </p>
+          <p className="font-bold">
+            Type: <span className="font-thin">{type}</span>{" "}
+          </p>
+          <p className="font-bold">
+            Other Names: <span className="font-thin">{otherName}</span>
+          </p>
         </div>
       </div>
       <div className="">
         <h2 className="pb-4 text-2xl">Episodes</h2>
         <ul className="flex flex-col gap-2 flex-wrap">
           {episodes.map((episode) => (
-            <Link href={`/anime/watch/${id}/${episode.number}`}   key={episode.number}>
+            <Link
+              href={`/anime/watch/${id}/${episode.number}`}
+              key={episode.number}
+            >
               <div
                 className="cursor-pointer bg-primary-foreground px-4 rounded-md hover:bg-secondary transition-colors py-2 w-full flex gap-2 items-center "
                 key={episode.number}

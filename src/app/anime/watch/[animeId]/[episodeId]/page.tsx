@@ -31,10 +31,6 @@ const page = ({ params }: Props) => {
     return () => {};
   }, []);
 
-  useEffect(() => {
-    console.log(source);
-    console.log(episodes);
-  }, [source]);
 
   const fetchWatchData = async () => {
     const data = await getWatchAnime(params.animeId, params.episodeId);
@@ -70,8 +66,9 @@ const page = ({ params }: Props) => {
 
           <ul className="w-full flex flex-col gap-2">
             <h1 className="text-3xl font-bold mb-4">Episodes:</h1>
-            {episodes?.map((episode) => (
+            {episodes?.map((episode, index) => (
               <Link
+              key={index}
                 href={`/anime/watch/${params.animeId}/${episode.number}`}
                 className={`w-full hover:bg-secondary transition-color px-6 rounded-md py-4 bg-primary-foreground flex gap-4 ${
                   params.episodeId == episode.number.toString()

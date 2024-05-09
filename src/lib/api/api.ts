@@ -1,12 +1,16 @@
+
+
+const animeBaseUrl = process.env.NEXT_PUBLIC_BASE_URL + "anime/gogoanime";
+
 export const fetchPopular = async (): Promise<any> => {
-  const response = await fetch("http://localhost/anime/gogoanime/popular");
+  const response = await fetch(`${animeBaseUrl}/popular`);
   const data = await response.json();
   return data;
 };
 
 export const getAnimeInfo = async (id: string): Promise<any> => {
   try {
-    const response = await fetch(`http://localhost/anime/gogoanime/info/${id}`);
+    const response = await fetch(`${animeBaseUrl}/info/${id}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -20,7 +24,7 @@ export const getWatchAnime = async (
 ): Promise<any> => {
   try {
     const response = await fetch(
-      `http://localhost/anime/gogoanime/watch/${animeId}-episode-${episodeId}`
+      `${animeBaseUrl}/watch/${animeId}-episode-${episodeId}`
     );
     const data = await response.json();
     return data;
@@ -31,13 +35,10 @@ export const getWatchAnime = async (
 
 export const getTopAiring = async (): Promise<any> => {
   try {
-    const response = await fetch(
-      `http://localhost/anime/gogoanime/top-airing`
-    );
+    const response = await fetch(`${animeBaseUrl}/top-airing`);
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
-

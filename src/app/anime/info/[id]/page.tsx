@@ -13,17 +13,14 @@ const Page = ({ params }: { params: { id: string } }) => {
     fetchAnimeInfo();
   }, []);
 
-  useEffect(() => {
-    console.log(animeInfo);
-  }, [animeInfo]);
+ 
 
   async function fetchAnimeInfo() {
     setLoading(true);
     try {
       const result = await getAnimeInfo(params.id);
 
-      if (result.message) {
-        console.log("asdsa");
+      if (result?.message) {
         setError(true);
         setLoading(false);
         return;
@@ -80,7 +77,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         </>
       )}
 
-      {error && <div>Error fetching anime info</div>}
+      {error && <div>Error fetching anime or doesn't exist</div>}
 
       {animeInfo?.id && <AnimeInfoComponent {...animeInfo} />}
     </div>

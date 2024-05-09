@@ -2,7 +2,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemesToggler } from "./ThemesToggler";
-import { Search } from "lucide-react";
+import { Loader, Search } from "lucide-react";
+import { CustomInput } from "./ui/search-bar";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const Navbar = () => {
   const currentPath = usePathname();
@@ -50,7 +52,15 @@ const Navbar = () => {
 
         {/* right  */}
         <div className="flex items-center gap-2">
-          <Search />
+          <Popover>
+            <PopoverTrigger>
+              <CustomInput Icon={Search}></CustomInput>
+              {" "}
+            </PopoverTrigger>
+            <PopoverContent className="flex gap-4">
+              <Loader className="animate-spin"></Loader> Loading....
+            </PopoverContent>
+          </Popover>
           <ThemesToggler></ThemesToggler>
         </div>
       </nav>
