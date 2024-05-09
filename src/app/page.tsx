@@ -48,7 +48,7 @@ export default function Home() {
 
             <div
               id="popular-cards"
-              className="flex gap-4 mt-2  flex-wrap justify-center"
+              className="flex gap-4 mt-2 p-5  flex-wrap justify-center"
             >
               {!loading ? (
                 popularAnime?.map((anime, index) => (

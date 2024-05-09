@@ -105,7 +105,7 @@ return (
             className={buttonClass}
             disabled={options.disabled}
           > 
-          <p className='font-semibold'>
+          <p className='font-semibold text-sm'>
           {options.selectedQuality?.height}
           </p>
        

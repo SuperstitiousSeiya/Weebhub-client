@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 const SoleDescription = ({ id }: { id: string }) => {
   const [description, setdescription] = useState("");
   const [loading, setloading] = useState(true);
+
   useEffect(() => {
     fetchAnimeDescription(id);
   }, []);
@@ -14,7 +15,7 @@ const SoleDescription = ({ id }: { id: string }) => {
   async function fetchAnimeDescription(id: string) {
     const data = await getAnimeInfo(id);
     setdescription(data.description);
-    setloading(false)
+    setloading(false);
   }
 
   return (
@@ -26,7 +27,9 @@ const SoleDescription = ({ id }: { id: string }) => {
           <Skeleton className="w-1/2 h-[1rem]"></Skeleton>
         </div>
       ) : (
-        <p>{description}</p>
+        <div className="max-h-[20rem] overflow-hidden">
+          <p className="text-sm">{description}</p>
+        </div>
       )}
     </>
   );

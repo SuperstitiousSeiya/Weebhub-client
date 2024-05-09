@@ -21,8 +21,9 @@ interface Episode {
 
 type Status = "loading" | "error" | "success";
 
-const page = ({ params }: Props) => {
+const Page = ({ params }: Props) => {
   const [source, setSource] = useState<any | null>();
+  const [image, setimage] = useState<any>();
   const [status, setStatus] = useState<Status>("loading");
   const [episodes, setepisodes] = useState<Episode[] | null>(null);
   const [animeTitle, setAnimeTitle] = useState("string");
@@ -43,7 +44,7 @@ const page = ({ params }: Props) => {
     );
 
     const episodeData = await getAnimeInfo(params.animeId);
-
+    setimage(episodeData.image)
     setAnimeTitle(episodeData.title);
     setepisodes(episodeData.episodes);
     setSource(defaultSource.url);
@@ -62,7 +63,7 @@ const page = ({ params }: Props) => {
               {animeTitle} - Episode {params.episodeId}
             </Link>
           </div>
-          <Player className="max-w-[50rem] mb-10" src={source} />
+          <Player className="max-w-[50rem] mb-10" src={source} image={image} />
 
           <ul className="w-full flex flex-col gap-2">
             <h1 className="text-3xl font-bold mb-4">Episodes:</h1>
@@ -110,4 +111,4 @@ const page = ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Page;

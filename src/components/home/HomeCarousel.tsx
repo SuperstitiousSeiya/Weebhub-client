@@ -1,7 +1,6 @@
-
 // @ts-ignore
 
-"use client"
+"use client";
 
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -15,12 +14,13 @@ import {
 import { Button } from "../ui/button";
 import { BookmarkPlus, Info, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import {getTopAiring } from "@/lib/api/api";
+import { getTopAiring } from "@/lib/api/api";
 import DynamicText from "../weebui/Text/DynamicText";
 import Link from "next/link";
 import SoleDescription from "../weebui/Text/SoleDescription";
 import { SkeletonCard } from "../weebui/Skeletons/SkeletonCard";
 import { Badge } from "../ui/badge";
+import Image from "next/image";
 
 type Props = {
   className?: string;
@@ -43,9 +43,6 @@ export function HomeCarousel({ className }: Props) {
   const [topAiring, setTopAiring] = useState<Anime[]>();
   const [loading, setloading] = useState(true);
   const plugin = React.useRef(Autoplay({ delay: 10000 }));
-
-
-
 
   useEffect(() => {
     fetchTopAiring();
@@ -71,36 +68,32 @@ export function HomeCarousel({ className }: Props) {
     setCurrent(api.selectedScrollSnap() + 1);
   };
 
-
-
   async function fetchTopAiring() {
     try {
       const data = await getTopAiring();
       setTopAiring(data.results);
       setloading(false);
     } catch (error) {
-      console.log("asds")
+      console.log("asds");
     }
-
   }
 
   return (
     <div className={`${className}`}>
-      <Carousel
-        plugins={[plugin.current]}
-        setApi={setApi}
-        className="max-h-[33rem]"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.play}
-      >
-        {loading ? (
-          <div className="">
-             <SkeletonCard /> 
-          </div>
-         
-        ) : (
-          <>
-            {" "}
+      {loading ? (
+        <div className="">
+          <SkeletonCard />
+        </div>
+      ) : (
+        <>
+          {" "}
+          <Carousel
+            plugins={[plugin.current]}
+            setApi={setApi}
+            // className="max-h-[37rem]"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.play}
+          >
             <CarouselContent className="h-full">
               {topAiring?.map((info, index) => (
                 <CarouselItem
@@ -114,7 +107,10 @@ export function HomeCarousel({ className }: Props) {
                         <div>
                           <div className="genres flex gap-2 flex-wrap mb-2">
                             {info.genres.map((genre, index) => (
-                              <Badge key={index} className="bg-green-500 px-2 y-1 rounded-md">
+                              <Badge
+                                key={index}
+                                className="bg-green-500 px-2 y-1 rounded-md"
+                              >
                                 {genre}
                               </Badge>
                             ))}
@@ -124,7 +120,7 @@ export function HomeCarousel({ className }: Props) {
                           <DynamicText className="max-lg:hidden mb-4">
                             <p>{info.title}</p>
                           </DynamicText>
-                          <h1 className="text-5xl mb-4 hidden max-lg:block">
+                          <h1 className="text-5xl mb-4 hidden max-lg:block  max-h-[15rem] overflow-hidden">
                             {info.title}
                           </h1>
                           <div className="description">
@@ -158,16 +154,20 @@ export function HomeCarousel({ className }: Props) {
                         </div>
                       </div>
 
-                      <div className="right  justify-end max-lg:hidden px-20">
-                        <img
+                      <div className="right w-[30rem] height-[80%] justify-end max-lg:hidden ">
+                        <Image
+                          height={500}
+                          width={500}
                           src={info.image}
                           alt={info.id}
-                          className="w-full aspect-[9/16] object-cover max-h-[30rem]"
+                          className="w-full aspect-[9/12] h-full object-cover"
                         />
                       </div>
                     </CardContent>
                   </Card>
-                  <img
+                  <Image
+                    height={500}
+                    width={500}
                     src={info.image}
                     alt=""
                     className="h-full w-full top-0 opacity-50 bottom-0 right-0 left-0 absolute object-cover lg:hidden"
@@ -192,9 +192,9 @@ export function HomeCarousel({ className }: Props) {
                 )
               )}
             </div>
-          </>
-        )}
-      </Carousel>
+          </Carousel>
+        </>
+      )}
     </div>
   );
 }

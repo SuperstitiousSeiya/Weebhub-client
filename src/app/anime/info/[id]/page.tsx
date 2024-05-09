@@ -77,7 +77,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         </>
       )}
 
-      {error && <div>Error fetching anime or doesn't exist</div>}
+      {error && <div>Error fetching anime or doesn&apos;t exist</div>}
 
       {animeInfo?.id && <AnimeInfoComponent {...animeInfo} />}
     </div>

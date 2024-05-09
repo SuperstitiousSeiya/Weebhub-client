@@ -5,15 +5,27 @@ import { useRef } from "react";
 import {
   MediaPlayer,
   MediaProvider,
+  Poster,
   type MediaPlayerInstance,
 } from "@vidstack/react";
 
 import { VideoLayout } from "./components/layouts/video-layout";
 import { Skeleton } from "../ui/skeleton";
-import '@vidstack/react/player/styles/base.css';
-import '@vidstack/react/player/styles/plyr/theme.css';
-import { PlyrLayout, plyrLayoutIcons } from '@vidstack/react/player/layouts/plyr';
-export function Player({ src, className }: { src: any; className: string }) {
+import "@vidstack/react/player/styles/base.css";
+import "@vidstack/react/player/styles/plyr/theme.css";
+import {
+  PlyrLayout,
+  plyrLayoutIcons,
+} from "@vidstack/react/player/layouts/plyr";
+export function Player({
+  src,
+  image,
+  className,
+}: {
+  src: any;
+  className: string;
+  image: any;
+}) {
   let player = useRef<MediaPlayerInstance>(null);
 
   return (
@@ -25,16 +37,17 @@ export function Player({ src, className }: { src: any; className: string }) {
           src={src}
           autoPlay
           ref={player}
+          playsInline
         >
           <MediaProvider>
-            {/* <Poster
-          className="absolute inset-0 block h-full w-full rounded-md opacity-0 transition-opacity data-[visible]:opacity-100 object-cover"
-          src="https://files.vidstack.io/sprite-fight/poster.webp"
-          alt="Girl walks into campfire with gnomes surrounding her friend ready for their next meal!"
-        /> */}
+            <Poster
+              className="absolute inset-0 block h-full w-full rounded-md opacity-0 transition-opacity data-[visible]:opacity-100 object-cover"
+              src={image}
+              alt="image"
+            />
           </MediaProvider>
-          {/* <VideoLayout thumbnails="thumbnails.vtt" /> */}
-          <PlyrLayout thumbnails="thumbnails.vtt" icons={plyrLayoutIcons} />
+          <VideoLayout thumbnails="thumbnails.vtt" />
+          {/* <PlyrLayout thumbnails="thumbnails.vtt" icons={plyrLayoutIcons} /> */}
         </MediaPlayer>
       ) : (
         <div>

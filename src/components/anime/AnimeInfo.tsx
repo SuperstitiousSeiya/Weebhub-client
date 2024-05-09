@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Play } from "lucide-react";
@@ -53,22 +54,22 @@ const AnimeInfoComponent = ({
     <div className="">
       <div className="flex gap-4 mb-4 max-lg:flex-col max-lg:items-center">
         {/* img  */}
-        <div className="flex w-[30rem] min-w-[15rem] max-h-[30rem]">
+        <div className="flex min-w-[25rem] h-[30rem] overflow-hidden px-4">
           <Image
             src={image}
             width={400}
             height={200}
-            className="aspect-[9/16] w-full h-full object-cover"
+            className="aspect-[9/12] w-full h-full object-cover"
             alt={title}
           />
         </div>
 
         {/* right */}
-        <div>
+        <div className="">
           <ul className="flex flex-wrap gap-2 mb-2">
             {genres.map((genre) => (
               <Badge
-                className={`bg-[${getRandomColor()}] w-fit px-2 py-1 rounded-md`}
+                className={`bg-green-200 w-fit px-2 py-1 rounded-md`}
                 key={genre}
               >
                 {genre}
