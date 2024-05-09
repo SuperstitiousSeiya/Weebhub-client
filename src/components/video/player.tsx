@@ -10,7 +10,9 @@ import {
 
 import { VideoLayout } from "./components/layouts/video-layout";
 import { Skeleton } from "../ui/skeleton";
-
+import '@vidstack/react/player/styles/base.css';
+import '@vidstack/react/player/styles/plyr/theme.css';
+import { PlyrLayout, plyrLayoutIcons } from '@vidstack/react/player/layouts/plyr';
 export function Player({ src, className }: { src: any; className: string }) {
   let player = useRef<MediaPlayerInstance>(null);
 
@@ -31,11 +33,12 @@ export function Player({ src, className }: { src: any; className: string }) {
           alt="Girl walks into campfire with gnomes surrounding her friend ready for their next meal!"
         /> */}
           </MediaProvider>
-          <VideoLayout thumbnails="thumbnails.vtt" />
+          {/* <VideoLayout thumbnails="thumbnails.vtt" /> */}
+          <PlyrLayout thumbnails="thumbnails.vtt" icons={plyrLayoutIcons} />
         </MediaPlayer>
       ) : (
         <div>
-          <Skeleton className="w-full aspect-video"  ></Skeleton>
+          <Skeleton className="w-full aspect-video"></Skeleton>
         </div>
       )}
     </>

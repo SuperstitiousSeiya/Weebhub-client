@@ -1,13 +1,13 @@
 import captionStyles from "./captions.module.css";
 
 import * as Tooltip from "@radix-ui/react-tooltip";
-import { Captions, Controls, Gesture } from "@vidstack/react";
+import { Captions, Controls, Gesture, PlayButton } from "@vidstack/react";
 
 import * as Buttons from "../buttons";
 import * as Menus from "../menus";
 import * as Sliders from "../sliders";
 import { TimeGroup } from "../time-group";
-
+import { PauseIcon, PlayIcon } from "lucide-react";
 
 // Offset tooltips/menus/slider previews in the lower controls group so they're clearly visible.
 const popupOffset = 30;
@@ -19,6 +19,7 @@ export interface VideoLayoutProps {
 export function VideoLayout({ thumbnails }: VideoLayoutProps) {
   return (
     <>
+
       <Gestures />
       <Captions
         className={`${captionStyles.captions} media-preview:opacity-100 media-controls:bottom-[85px] media-captions:opacity-100 absolute inset-0 bottom-2 z-10 select-none break-words opacity-0 transition-[opacity,bottom] duration-300`}
@@ -55,7 +56,7 @@ function Gestures() {
   return (
     <>
       <Gesture
-        className="absolute inset-0 z-0 block h-full w-full"
+        className="absolute inset-0 z-0  vds-gesture block size-[5rem] m-auto left-0 right-0 "
         event="pointerup"
         action="toggle:paused"
       />
