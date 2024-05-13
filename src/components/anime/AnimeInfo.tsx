@@ -1,12 +1,9 @@
-
-
-
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
-
 
 export type Episode = {
   id: string;
@@ -45,11 +42,19 @@ const AnimeInfoComponent = ({
   type,
   url,
 }: AnimeInfo) => {
+  const pageSize = 20;
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const totalPages = Math.ceil(episodes.length / pageSize);
 
-  //   const gotoEpisode = (watchId: number) => {
-  //     redirect(`watch/${id}/${watchId}`);
-  //   };
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, episodes.length);
+
+  const currentEpisodes = episodes.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: any) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="">
@@ -105,19 +110,49 @@ const AnimeInfoComponent = ({
       <div className="">
         <h2 className="pb-4 text-2xl">Episodes</h2>
         <ul className="flex flex-col gap-2 flex-wrap">
-          {episodes.map((episode) => (
-            <Link
-              href={`/anime/watch/${id}/${episode.number}`}
-              key={episode.number}
-            >
-              <div
-                className="cursor-pointer bg-primary-foreground px-4 rounded-md hover:bg-secondary transition-colors py-2 w-full flex gap-2 items-center "
-                key={episode.number}
-              >
-                Episode {episode.number} <Play></Play>
+          <div className="flex mt-4 flex-col">
+
+
+            <div className="mb-4 gap-4 items-center justify-center button-container-episodes" id="button-container-episodes">
+              {currentEpisodes.map((episode) => (
+                <Link
+                  href={`/anime/watch/${id}/${episode.number}`}
+                  className="flex-1 flex items-center justify-center "
+                  key={episode.number}
+                >
+                  <div
+                    className="cursor-pointer   bg-primary-foreground px-4 rounded-md hover:bg-secondary transition-colors py-2 w-full flex gap-2 justify-center items-center "
+                    key={episode.number}
+                  >
+                    Episode {episode.number} <Play></Play>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex gap-4 flex-wrap justify-center">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`mx-1 px-2 py-1 rounded-md w-[10rem] hover:opacity-80 transition-opacity ${
+                      currentPage === index + 1
+                        ? "bg-gray-200 text-gray-700 cursor-default"
+                        : " bg-secondary text-white"
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index * pageSize + 1}-
+                    {Math.min((index + 1) * pageSize, episodes.length)}
+                  </button>
+                ))}
               </div>
-            </Link>
-          ))}
+            )}
+
+
+          </div>
+
+
         </ul>
       </div>
     </div>

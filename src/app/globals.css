@@ -125,5 +125,11 @@ svg.star-svg {
   .pulse {
     animation: pulse 0.5s infinite;
   }
+
+  .button-container-episodes{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    
+  }
 }
 

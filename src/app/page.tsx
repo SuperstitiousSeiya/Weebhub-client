@@ -1,14 +1,10 @@
-import ErrorPage from "@/components/ErrorPage";
 import AnimePopularList from "@/components/anime/AnimePopularList";
 import { HomeCarousel } from "@/components/home/HomeCarousel";
 import PopularSide from "@/components/home/PopularSide";
-import PopularSkeleton from "@/components/home/PopularSkeleton";
-import { SkeletonCard } from "@/components/weebui/Skeletons/SkeletonCard";
-import { SkeletonPopularSide } from "@/components/weebui/Skeletons/SkeletonPopularSide";
-import WeebCard, { Anime } from "@/components/weebui/WeebCard";
+
+
 import { useAnime } from "@/lib/hooks/useAnime";
-// import { fetchPopular } from "@/lib/api/api";
-import { Suspense, useEffect, useState } from "react";
+
 
 export default async function Home() {
   const { getTopAiring, getAnimeInfo } = useAnime();

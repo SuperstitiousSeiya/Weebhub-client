@@ -4,7 +4,7 @@ import { SkeletonPopularSide } from "@/components/weebui/Skeletons/SkeletonPopul
 
 import React from "react";
 
-const loading = () => {
+const HomeSkeleton = () => {
   return (
     <section className="px-4 xl:grid py-2 gap-4 container" id="home-section">
       <div className="flex flex-col gap-6 pt-2">
@@ -35,4 +35,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default HomeSkeleton;
