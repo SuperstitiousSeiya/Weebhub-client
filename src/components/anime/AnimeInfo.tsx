@@ -1,11 +1,12 @@
 
+
+
 import React from "react";
-import { useRouter, useParams } from "next/navigation";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
-import { getRandomColor } from "@/lib/other/extras";
+
 
 export type Episode = {
   id: string;
@@ -44,7 +45,7 @@ const AnimeInfoComponent = ({
   type,
   url,
 }: AnimeInfo) => {
-  const navigate = useRouter();
+
 
   //   const gotoEpisode = (watchId: number) => {
   //     redirect(`watch/${id}/${watchId}`);

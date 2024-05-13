@@ -119,11 +119,11 @@ function Gestures() {
         event="pointerup"
         action="toggle:paused"
       />
-      <Gesture
+      {/* <Gesture
         className="absolute inset-0 z-0 block h-full w-full"
         event="dblpointerup"
         action="toggle:fullscreen"
-      />
+      /> */}
       <Gesture
         className="absolute left-0 top-0 z-10 block h-full w-1/5"
         event="dblpointerup"

@@ -1,3 +1,5 @@
+"use client"
+
 import "@vidstack/react/player/styles/base.css";
 
 import { useRef } from "react";
@@ -46,7 +48,7 @@ export function Player({
               alt="image"
             />
           </MediaProvider>
-          <VideoLayout thumbnails="thumbnails.vtt" />
+          <VideoLayout thumbnails="" />
           {/* <PlyrLayout thumbnails="thumbnails.vtt" icons={plyrLayoutIcons} /> */}
         </MediaPlayer>
       ) : (
